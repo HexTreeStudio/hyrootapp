@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hyroot – Smazání účtu / Account Deletion</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0d1f14;
+      color: #e0e0e0;
+      line-height: 1.7;
+      padding: 40px 20px;
+    }
+    .container { max-width: 720px; margin: 0 auto; }
+    h1 { color: #52b788; font-size: 28px; margin-bottom: 8px; }
+    .subtitle { color: #888; font-size: 14px; margin-bottom: 32px; }
+    h2 { color: #52b788; font-size: 20px; margin-top: 32px; margin-bottom: 12px; border-bottom: 1px solid #1a3a24; padding-bottom: 6px; }
+    p, li { margin-bottom: 10px; color: #ccc; font-size: 15px; }
+    ul { padding-left: 24px; margin-bottom: 16px; }
+    a { color: #52b788; }
+    .highlight { background: #52b78815; border: 1px solid #52b78830; border-radius: 12px; padding: 16px; margin: 16px 0; }
+    .lang-toggle { display: inline-block; background: #1a3a24; color: #52b788; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; margin-bottom: 24px; border: 1px solid #52b78840; }
+    .lang-toggle:hover { background: #224a30; }
+    .hidden { display: none; }
+    .footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid #1a3a24; color: #666; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div style="text-align: right;">
+      <span class="lang-toggle" onclick="toggleLang()">🇬🇧 English version</span>
+    </div>
+
+    <!-- ═══════════════ CZECH ═══════════════ -->
+    <div id="cs" class="section">
+      <h1>Smazání účtu a dat</h1>
+      <p class="subtitle">Aplikace Hyroot · Hextree Studio</p>
+
+      <h2>Jak požádat o smazání účtu</h2>
+      <p>Pokud chcete smazat svůj účet v aplikaci Hyroot a všechna přidružená data, zašlete e-mail na adresu:</p>
+      <div class="highlight">
+        <p><strong>E-mail:</strong> <a href="mailto:privacy@hyroot.app">privacy@hyroot.app</a></p>
+        <p><strong>Předmět:</strong> Žádost o smazání účtu</p>
+        <p><strong>Obsah:</strong> Uveďte e-mailovou adresu, pod kterou jste registrováni v aplikaci Hyroot.</p>
+      </div>
+      <p>Vaši žádost zpracujeme do <strong>30 dnů</strong> od jejího přijetí.</p>
+
+      <h2>Jaká data budou smazána</h2>
+      <p>Po zpracování žádosti budou <strong>trvale odstraněna</strong> následující data:</p>
+      <ul>
+        <li>Váš uživatelský účet a přihlašovací údaje (e-mail, heslo)</li>
+        <li>Všechny hydroponické systémy a jejich nastavení</li>
+        <li>Všechny plodiny a záznamy o sklizni</li>
+        <li>Všechna měření (pH, EC, teplota, vlhkost)</li>
+        <li>Knihovna rostlin</li>
+        <li>Připomínky</li>
+        <li>Uživatelská nastavení (sazba elektřiny, měna, jazyk)</li>
+      </ul>
+
+      <h2>Jaká data mohou být dočasně uchována</h2>
+      <ul>
+        <li><strong>Údaje o předplatném</strong> – informace o platbách za Hyroot Pro jsou spravovány službami Google Play a RevenueCat. Tyto údaje mohou být uchovány po dobu vyžadovanou právními předpisy (obvykle do 180 dnů) pro účely účetnictví a řešení případných reklamací.</li>
+        <li><strong>Zálohy</strong> – zálohy databáze mohou obsahovat vaše data po dobu až 30 dnů od smazání, poté jsou automaticky odstraněny.</li>
+      </ul>
+
+      <h2>Kontakt</h2>
+      <p>V případě dotazů ohledně smazání dat nás kontaktujte na <a href="mailto:privacy@hyroot.app">privacy@hyroot.app</a>.</p>
+    </div>
+
+    <!-- ═══════════════ ENGLISH ═══════════════ -->
+    <div id="en" class="section hidden">
+      <h1>Account & Data Deletion</h1>
+      <p class="subtitle">Hyroot App · Hextree Studio</p>
+
+      <h2>How to request account deletion</h2>
+      <p>If you wish to delete your Hyroot account and all associated data, send an email to:</p>
+      <div class="highlight">
+        <p><strong>Email:</strong> <a href="mailto:privacy@hyroot.app">privacy@hyroot.app</a></p>
+        <p><strong>Subject:</strong> Account deletion request</p>
+        <p><strong>Body:</strong> Include the email address you used to register in the Hyroot app.</p>
+      </div>
+      <p>Your request will be processed within <strong>30 days</strong> of receipt.</p>
+
+      <h2>Data that will be deleted</h2>
+      <p>Upon processing your request, the following data will be <strong>permanently removed</strong>:</p>
+      <ul>
+        <li>Your user account and login credentials (email, password)</li>
+        <li>All hydroponic systems and their settings</li>
+        <li>All crops and harvest records</li>
+        <li>All measurements (pH, EC, temperature, humidity)</li>
+        <li>Plant library</li>
+        <li>Reminders</li>
+        <li>User settings (electricity rate, currency, language)</li>
+      </ul>
+
+      <h2>Data that may be temporarily retained</h2>
+      <ul>
+        <li><strong>Subscription data</strong> – payment information for Hyroot Pro is managed by Google Play and RevenueCat. This data may be retained for the period required by law (typically up to 180 days) for accounting and dispute resolution purposes.</li>
+        <li><strong>Backups</strong> – database backups may contain your data for up to 30 days after deletion, after which they are automatically purged.</li>
+      </ul>
+
+      <h2>Contact</h2>
+      <p>For questions about data deletion, contact us at <a href="mailto:privacy@hyroot.app">privacy@hyroot.app</a>.</p>
+    </div>
+
+    <div class="footer">
+      <p>© 2026 Hextree Studio · Hyroot</p>
+    </div>
+  </div>
+
+  <script>
+    let currentLang = 'cs';
+    function toggleLang() {
+      const csEl = document.getElementById('cs');
+      const enEl = document.getElementById('en');
+      const btn = document.querySelector('.lang-toggle');
+      if (currentLang === 'cs') {
+        csEl.classList.add('hidden');
+        enEl.classList.remove('hidden');
+        btn.textContent = '🇨🇿 Česká verze';
+        currentLang = 'en';
+      } else {
+        enEl.classList.add('hidden');
+        csEl.classList.remove('hidden');
+        btn.textContent = '🇬🇧 English version';
+        currentLang = 'cs';
+      }
+    }
+  </script>
+</body>
+</html>
