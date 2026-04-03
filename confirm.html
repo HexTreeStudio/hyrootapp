@@ -44,6 +44,13 @@
     }
     .btn:hover { opacity: 0.9; }
     .hint { color: #4a7c59; font-size: 12px; line-height: 1.5; margin-top: 16px; }
+    .desktop-hint {
+      font-size: 15px;
+      color: #52b788;
+      font-weight: 600;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
     .spinner {
       width: 24px; height: 24px;
       border: 3px solid #1a4731;
@@ -55,7 +62,6 @@
     @keyframes spin { to { transform: rotate(360deg); } }
     .status { color: #74c69d; font-size: 14px; margin-bottom: 8px; }
     .hidden { display: none; }
-
     .lang-toggle {
       display: inline-block;
       color: #4a7c59;
@@ -81,7 +87,7 @@
       <div class="status hidden" id="status-en">Redirecting to the app...</div>
     </div>
 
-    <!-- Success / PC fallback -->
+    <!-- Success -->
     <div id="result" class="hidden">
       <div class="icon">✅</div>
 
@@ -91,8 +97,11 @@
           Tvůj účet byl úspěšně ověřen. Nyní se můžeš přihlásit v aplikaci Hyroot.
         </div>
         <a href="#" id="open-app-btn-cs" class="btn">Otevřít aplikaci</a>
+        <div id="desktop-hint-cs" class="desktop-hint hidden">
+          Otevři aplikaci Hyroot na svém telefonu a přihlas se.
+        </div>
         <div class="hint">
-          Pokud se aplikace neotevřela automaticky, otevři ji ručně na svém telefonu a přihlas se.
+          Pokud se aplikace neotevřela automaticky, otevři ji ručně na svém telefonu.
         </div>
       </div>
 
@@ -102,8 +111,11 @@
           Your account has been verified. You can now sign in to the Hyroot app.
         </div>
         <a href="#" id="open-app-btn-en" class="btn">Open app</a>
+        <div id="desktop-hint-en" class="desktop-hint hidden">
+          Open the Hyroot app on your phone and sign in.
+        </div>
         <div class="hint">
-          If the app didn't open automatically, open it manually on your phone and sign in.
+          If the app didn't open automatically, open it manually on your phone.
         </div>
       </div>
 
@@ -133,12 +145,18 @@
   </div>
 
   <script>
-    let lang = 'cs';
+    var lang = 'cs';
+
+    function isMobile() {
+      return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+    }
 
     function toggleLang() {
       lang = lang === 'cs' ? 'en' : 'cs';
-      const toggle = document.querySelectorAll('.lang-toggle');
-      toggle.forEach(t => t.textContent = lang === 'cs' ? '🇬🇧 English' : '🇨🇿 Česky');
+      var toggles = document.querySelectorAll('.lang-toggle');
+      for (var i = 0; i < toggles.length; i++) {
+        toggles[i].textContent = lang === 'cs' ? '🇬🇧 English' : '🇨🇿 Česky';
+      }
 
       document.getElementById('content-cs').classList.toggle('hidden', lang !== 'cs');
       document.getElementById('content-en').classList.toggle('hidden', lang !== 'en');
@@ -148,36 +166,35 @@
       document.getElementById('status-en').classList.toggle('hidden', lang !== 'en');
     }
 
-    (async function() {
-      const hash = window.location.hash;
-      const params = new URLSearchParams(hash.replace('#', ''));
+    (function() {
+      var hash = window.location.hash;
+      var params = new URLSearchParams(hash.replace('#', ''));
 
-      const accessToken = params.get('access_token');
-      const refreshToken = params.get('refresh_token');
-      const type = params.get('type');
+      var accessToken = params.get('access_token');
+      var refreshToken = params.get('refresh_token');
+      var type = params.get('type');
 
-      // If this is a confirmation or recovery link
       if (accessToken) {
-        // Try to open the app via deep link
-        const deepLink = `hyroot://auth?access_token=${accessToken}&refresh_token=${refreshToken || ''}&type=${type || ''}`;
+        var deepLink = 'hyroot://auth?access_token=' + accessToken + '&refresh_token=' + (refreshToken || '') + '&type=' + (type || '');
 
-        // Set app open buttons
         document.getElementById('open-app-btn-cs').href = deepLink;
         document.getElementById('open-app-btn-en').href = deepLink;
 
-        // Try auto-redirect to app
-        setTimeout(() => {
-          window.location.href = deepLink;
-        }, 500);
+        if (isMobile()) {
+          setTimeout(function() { window.location.href = deepLink; }, 500);
+        } else {
+          document.getElementById('open-app-btn-cs').classList.add('hidden');
+          document.getElementById('open-app-btn-en').classList.add('hidden');
+          document.getElementById('desktop-hint-cs').classList.remove('hidden');
+          document.getElementById('desktop-hint-en').classList.remove('hidden');
+        }
 
-        // After 2 seconds, show the manual button (app probably didn't open = PC)
-        setTimeout(() => {
+        setTimeout(function() {
           document.getElementById('loading').classList.add('hidden');
           document.getElementById('result').classList.remove('hidden');
-        }, 2000);
+        }, isMobile() ? 2000 : 500);
 
       } else {
-        // No token — show error
         document.getElementById('loading').classList.add('hidden');
         document.getElementById('error').classList.remove('hidden');
       }
