@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hyroot – Potvrzení účtu</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0d1f14;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      max-width: 420px;
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(82,183,136,0.2);
+      border-radius: 24px;
+      padding: 40px 32px;
+      text-align: center;
+    }
+    .logo { color: #52b788; font-size: 36px; font-weight: 800; margin-bottom: 4px; }
+    .tagline { color: #4a7c59; font-size: 13px; margin-bottom: 32px; }
+    .icon { font-size: 48px; margin-bottom: 16px; }
+    .title { color: #d8f3dc; font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .message { color: #95d5b2; font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
+    .btn {
+      display: inline-block;
+      background: #52b788;
+      color: #0d1f14;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 14px;
+      margin-bottom: 16px;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.9; }
+    .hint { color: #4a7c59; font-size: 12px; line-height: 1.5; margin-top: 16px; }
+    .spinner {
+      width: 24px; height: 24px;
+      border: 3px solid #1a4731;
+      border-top-color: #52b788;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .status { color: #74c69d; font-size: 14px; margin-bottom: 8px; }
+    .hidden { display: none; }
+
+    .lang-toggle {
+      display: inline-block;
+      color: #4a7c59;
+      font-size: 12px;
+      cursor: pointer;
+      margin-top: 24px;
+      padding: 4px 8px;
+      border: 1px solid #1a3a24;
+      border-radius: 6px;
+    }
+    .lang-toggle:hover { color: #52b788; border-color: #52b788; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">Hyroot</div>
+    <div class="tagline">Your hydroponic journal</div>
+
+    <!-- Loading state -->
+    <div id="loading">
+      <div class="spinner"></div>
+      <div class="status" id="status-cs">Přesměrovávám do aplikace...</div>
+      <div class="status hidden" id="status-en">Redirecting to the app...</div>
+    </div>
+
+    <!-- Success / PC fallback -->
+    <div id="result" class="hidden">
+      <div class="icon">✅</div>
+
+      <div id="content-cs">
+        <div class="title">Účet potvrzen!</div>
+        <div class="message">
+          Tvůj účet byl úspěšně ověřen. Nyní se můžeš přihlásit v aplikaci Hyroot.
+        </div>
+        <a href="#" id="open-app-btn-cs" class="btn">Otevřít aplikaci</a>
+        <div class="hint">
+          Pokud se aplikace neotevřela automaticky, otevři ji ručně na svém telefonu a přihlas se.
+        </div>
+      </div>
+
+      <div id="content-en" class="hidden">
+        <div class="title">Account confirmed!</div>
+        <div class="message">
+          Your account has been verified. You can now sign in to the Hyroot app.
+        </div>
+        <a href="#" id="open-app-btn-en" class="btn">Open app</a>
+        <div class="hint">
+          If the app didn't open automatically, open it manually on your phone and sign in.
+        </div>
+      </div>
+
+      <span class="lang-toggle" onclick="toggleLang()">🇬🇧 English</span>
+    </div>
+
+    <!-- Error state -->
+    <div id="error" class="hidden">
+      <div class="icon">⚠️</div>
+
+      <div id="error-cs">
+        <div class="title">Něco se pokazilo</div>
+        <div class="message">
+          Nepodařilo se ověřit tvůj účet. Zkus to znovu nebo se zaregistruj znovu v aplikaci.
+        </div>
+      </div>
+
+      <div id="error-en" class="hidden">
+        <div class="title">Something went wrong</div>
+        <div class="message">
+          We couldn't verify your account. Please try again or register again in the app.
+        </div>
+      </div>
+
+      <span class="lang-toggle" onclick="toggleLang()">🇬🇧 English</span>
+    </div>
+  </div>
+
+  <script>
+    let lang = 'cs';
+
+    function toggleLang() {
+      lang = lang === 'cs' ? 'en' : 'cs';
+      const toggle = document.querySelectorAll('.lang-toggle');
+      toggle.forEach(t => t.textContent = lang === 'cs' ? '🇬🇧 English' : '🇨🇿 Česky');
+
+      document.getElementById('content-cs').classList.toggle('hidden', lang !== 'cs');
+      document.getElementById('content-en').classList.toggle('hidden', lang !== 'en');
+      document.getElementById('error-cs').classList.toggle('hidden', lang !== 'cs');
+      document.getElementById('error-en').classList.toggle('hidden', lang !== 'en');
+      document.getElementById('status-cs').classList.toggle('hidden', lang !== 'cs');
+      document.getElementById('status-en').classList.toggle('hidden', lang !== 'en');
+    }
+
+    (async function() {
+      const hash = window.location.hash;
+      const params = new URLSearchParams(hash.replace('#', ''));
+
+      const accessToken = params.get('access_token');
+      const refreshToken = params.get('refresh_token');
+      const type = params.get('type');
+
+      // If this is a confirmation or recovery link
+      if (accessToken) {
+        // Try to open the app via deep link
+        const deepLink = `hyroot://auth?access_token=${accessToken}&refresh_token=${refreshToken || ''}&type=${type || ''}`;
+
+        // Set app open buttons
+        document.getElementById('open-app-btn-cs').href = deepLink;
+        document.getElementById('open-app-btn-en').href = deepLink;
+
+        // Try auto-redirect to app
+        setTimeout(() => {
+          window.location.href = deepLink;
+        }, 500);
+
+        // After 2 seconds, show the manual button (app probably didn't open = PC)
+        setTimeout(() => {
+          document.getElementById('loading').classList.add('hidden');
+          document.getElementById('result').classList.remove('hidden');
+        }, 2000);
+
+      } else {
+        // No token — show error
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('error').classList.remove('hidden');
+      }
+    })();
+  </script>
+</body>
+</html>
