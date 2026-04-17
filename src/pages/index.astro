@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="cs">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hyroot – Privacy Policy / Zásady ochrany soukromí</title>
-  <style>
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Hyroot – Privacy Policy / Zásady ochrany soukromí">
+  <style is:global>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -13,68 +11,36 @@
       line-height: 1.7;
       padding: 40px 20px;
     }
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-    h1 {
-      color: #52b788;
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
-    .subtitle {
-      color: #888;
-      font-size: 14px;
-      margin-bottom: 32px;
-    }
+    .container { max-width: 720px; margin: 0 auto; }
+    h1 { color: #52b788; font-size: 28px; margin-bottom: 8px; }
+    .subtitle { color: #888; font-size: 14px; margin-bottom: 32px; }
     h2 {
-      color: #52b788;
-      font-size: 20px;
-      margin-top: 32px;
-      margin-bottom: 12px;
-      border-bottom: 1px solid #1a3a24;
-      padding-bottom: 6px;
+      color: #52b788; font-size: 20px; margin-top: 32px; margin-bottom: 12px;
+      border-bottom: 1px solid #1a3a24; padding-bottom: 6px;
     }
-    p, li {
-      margin-bottom: 10px;
-      color: #ccc;
-      font-size: 15px;
-    }
-    ul {
-      padding-left: 24px;
-      margin-bottom: 16px;
-    }
+    p, li { margin-bottom: 10px; color: #ccc; font-size: 15px; }
+    ul { padding-left: 24px; margin-bottom: 16px; }
     a { color: #52b788; }
     .lang-toggle {
-      display: inline-block;
-      background: #1a3a24;
-      color: #52b788;
-      padding: 8px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-      margin-bottom: 24px;
-      border: 1px solid #52b78840;
+      display: inline-block; background: #1a3a24; color: #52b788;
+      padding: 8px 16px; border-radius: 8px; cursor: pointer;
+      font-size: 14px; margin-bottom: 24px; border: 1px solid #52b78840;
     }
     .lang-toggle:hover { background: #224a30; }
     .section { display: block; }
     .hidden { display: none; }
     .footer {
-      margin-top: 48px;
-      padding-top: 24px;
-      border-top: 1px solid #1a3a24;
-      color: #666;
-      font-size: 13px;
+      margin-top: 48px; padding-top: 24px;
+      border-top: 1px solid #1a3a24; color: #666; font-size: 13px;
     }
   </style>
-</head>
-<body>
+
   <div class="container">
     <div style="text-align: right;">
       <span class="lang-toggle" onclick="toggleLang()">🇬🇧 English version</span>
     </div>
 
-    <!-- ═══════════════ CZECH ═══════════════ -->
+    <!-- CZECH -->
     <div id="cs" class="section">
       <h1>Zásady ochrany soukromí</h1>
       <p class="subtitle">Aplikace Hyroot · Platné od 17. března 2026</p>
@@ -130,7 +96,7 @@
       <p>V případě dotazů ohledně ochrany soukromí nás kontaktujte na <a href="mailto:privacy@hyroot.app">privacy@hyroot.app</a>.</p>
     </div>
 
-    <!-- ═══════════════ ENGLISH ═══════════════ -->
+    <!-- ENGLISH -->
     <div id="en" class="section hidden">
       <h1>Privacy Policy</h1>
       <p class="subtitle">Hyroot App · Effective from March 17, 2026</p>
@@ -191,7 +157,7 @@
     </div>
   </div>
 
-  <script>
+  <script is:inline>
     let currentLang = 'cs';
     function toggleLang() {
       const csEl = document.getElementById('cs');
@@ -210,5 +176,4 @@
       }
     }
   </script>
-</body>
-</html>
+</Layout>
