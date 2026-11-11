@@ -43,7 +43,7 @@ import Layout from '../layouts/Layout.astro';
     <!-- CZECH -->
     <div id="cs" class="section">
       <h1>Zásady ochrany soukromí</h1>
-      <p class="subtitle">Aplikace Hyroot · Platné od 5. listopadu 2026</p>
+      <p class="subtitle">Aplikace Hyroot · Platné od 11. listopadu 2026</p>
 
       <h2>1. Správce údajů</h2>
       <p>Správcem osobních údajů je <strong>Lukáš Plesník</strong>, IČO 06506003, se sídlem Slatinice 441, 783 42 Slatinice, Česká republika, podnikající pod označením Hextree Studio (dále jen „my"), provozovatel mobilní aplikace Hyroot. Kontakt: <a href="mailto:support@hyroot.app">support@hyroot.app</a></p>
@@ -56,7 +56,8 @@ import Layout from '../layouts/Layout.astro';
         <li><strong>Nastavení:</strong> jazykové preference, měna a sazba elektřiny.</li>
         <li><strong>Data z kamery:</strong> aplikace přistupuje ke kameře pouze za účelem skenování QR kódů vašich systémů. Fotografie nejsou automaticky odesílány na servery.</li>
         <li><strong>Údaje o předplatném:</strong> informace o vašem předplatném Hyroot Pro jsou zpracovávány prostřednictvím služby RevenueCat a Google Play.</li>
-        <li><strong>Push notifikace:</strong> pokud povolíte oznámení, ukládáme token zařízení pro doručování připomínek.</li>
+        <li><strong>Oznámení:</strong> připomínky jsou plánovány přímo ve vašem zařízení. Pro jejich doručení neukládáme žádný token zařízení.</li>
+        <li><strong>Diagnostické údaje:</strong> při pádu aplikace nebo chybě odesíláme technické informace o chybě a zařízení (model, verze systému, verze aplikace, anonymní identifikátor instalace) prostřednictvím služby Sentry, abychom mohli chyby opravit. Tyto údaje neobsahují váš e-mail ani obsah, který do aplikace zadáváte.</li>
       </ul>
 
       <h2>3. Jak údaje používáme</h2>
@@ -66,6 +67,7 @@ import Layout from '../layouts/Layout.astro';
         <li>Synchronizaci vašich dat mezi zařízeními.</li>
         <li>Zasílání připomínek, které jste si nastavili.</li>
         <li>Správě vašeho předplatného.</li>
+        <li>Odhalování a opravě chyb v aplikaci.</li>
       </ul>
 
       <h2>4. Sdílení údajů s třetími stranami</h2>
@@ -74,7 +76,7 @@ import Layout from '../layouts/Layout.astro';
         <li><strong>Supabase</strong> – poskytovatel databáze a autentizace (ukládání vašich dat).</li>
         <li><strong>RevenueCat</strong> – správa předplatného.</li>
         <li><strong>Google Play</strong> – zpracování plateb.</li>
-        <li><strong>Expo</strong> – doručování push notifikací.</li>
+        <li><strong>Sentry</strong> – hlášení chyb a pádů aplikace.</li>
       </ul>
 
       <h2>5. Zabezpečení údajů</h2>
@@ -100,7 +102,7 @@ import Layout from '../layouts/Layout.astro';
     <!-- ENGLISH -->
     <div id="en" class="section hidden">
       <h1>Privacy Policy</h1>
-      <p class="subtitle">Hyroot App · Effective from November 5, 2026</p>
+      <p class="subtitle">Hyroot App · Effective from November 11, 2026</p>
 
       <h2>1. Data Controller</h2>
       <p>The data controller is <strong>Lukáš Plesník</strong>, Company ID (IČO) 06506003, Slatinice 441, 783 42 Slatinice, Czech Republic, trading as Hextree Studio ("we"), the operator of the Hyroot mobile application. Contact: <a href="mailto:support@hyroot.app">support@hyroot.app</a></p>
@@ -113,7 +115,8 @@ import Layout from '../layouts/Layout.astro';
         <li><strong>Settings:</strong> language preferences, currency, and electricity rate.</li>
         <li><strong>Camera data:</strong> the app accesses the camera solely for scanning QR codes on your systems. Photos are not automatically sent to our servers.</li>
         <li><strong>Subscription data:</strong> information about your Hyroot Pro subscription is processed through RevenueCat and Google Play.</li>
-        <li><strong>Push notifications:</strong> if you enable notifications, we store a device token to deliver your reminders.</li>
+        <li><strong>Notifications:</strong> reminders are scheduled directly on your device. We do not store any device token to deliver them.</li>
+        <li><strong>Diagnostic data:</strong> when the app crashes or an error occurs, we send technical information about the error and device (model, OS version, app version, an anonymous installation identifier) through Sentry so we can fix it. This data does not include your email or the content you enter into the app.</li>
       </ul>
 
       <h2>3. How We Use Your Data</h2>
@@ -123,6 +126,7 @@ import Layout from '../layouts/Layout.astro';
         <li>Synchronize your data across devices.</li>
         <li>Send reminders that you have set up.</li>
         <li>Manage your subscription.</li>
+        <li>Detect and fix errors in the app.</li>
       </ul>
 
       <h2>4. Third-Party Sharing</h2>
@@ -131,7 +135,7 @@ import Layout from '../layouts/Layout.astro';
         <li><strong>Supabase</strong> – database and authentication provider (storing your data).</li>
         <li><strong>RevenueCat</strong> – subscription management.</li>
         <li><strong>Google Play</strong> – payment processing.</li>
-        <li><strong>Expo</strong> – push notification delivery.</li>
+        <li><strong>Sentry</strong> – error and crash reporting.</li>
       </ul>
 
       <h2>5. Data Security</h2>
