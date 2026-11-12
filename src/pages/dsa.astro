@@ -1,0 +1,272 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Hyroot – Nahlášení obsahu / Report Content">
+  <style is:global>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0d1f14;
+      color: #e0e0e0;
+      line-height: 1.7;
+      padding: 40px 20px;
+    }
+    .container { max-width: 720px; margin: 0 auto; }
+    h1 { color: #52b788; font-size: 28px; margin-bottom: 8px; }
+    .subtitle { color: #888; font-size: 14px; margin-bottom: 32px; }
+    h2 {
+      color: #52b788; font-size: 20px; margin-top: 32px; margin-bottom: 12px;
+      border-bottom: 1px solid #1a3a24; padding-bottom: 6px;
+    }
+    p, li { margin-bottom: 10px; color: #ccc; font-size: 15px; }
+    ul { padding-left: 24px; margin-bottom: 16px; }
+    a { color: #52b788; }
+    .lang-toggle {
+      display: inline-block; background: #1a3a24; color: #52b788;
+      padding: 8px 16px; border-radius: 8px; cursor: pointer;
+      font-size: 14px; margin-bottom: 24px; border: 1px solid #52b78840;
+    }
+    .lang-toggle:hover { background: #224a30; }
+    .section { display: block; }
+    .hidden { display: none; }
+    .card {
+      background: #12291b; border: 1px solid #1a3a24; border-radius: 10px;
+      padding: 16px 18px; margin: 12px 0 16px;
+    }
+    .card p { margin-bottom: 4px; }
+    form { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+    label { color: #ccc; font-size: 14px; font-weight: 600; display: block; margin-bottom: 4px; }
+    .hint { color: #888; font-size: 13px; font-weight: 400; }
+    input[type="text"], input[type="email"], textarea {
+      width: 100%; background: #12291b; color: #e0e0e0;
+      border: 1px solid #2d6a4f; border-radius: 8px; padding: 10px 12px;
+      font: inherit; font-size: 15px;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    input:focus, textarea:focus { outline: 2px solid #52b788; outline-offset: 1px; }
+    .check { display: flex; gap: 10px; align-items: flex-start; }
+    .check input { margin-top: 5px; accent-color: #52b788; }
+    .check span { color: #ccc; font-size: 14px; }
+    button {
+      background: #52b788; color: #0d1f14; border: 0; border-radius: 10px;
+      padding: 12px 18px; font-size: 16px; font-weight: 700; cursor: pointer;
+      align-self: flex-start;
+    }
+    button:hover { background: #74c69d; }
+    .error { color: #f87171; font-size: 14px; min-height: 1em; }
+    .footer {
+      margin-top: 48px; padding-top: 24px;
+      border-top: 1px solid #1a3a24; color: #666; font-size: 13px;
+    }
+  </style>
+
+  <div class="container">
+    <div style="text-align: right;">
+      <span class="lang-toggle" onclick="toggleLang()">🇬🇧 English version</span>
+    </div>
+
+    <!-- CZECH -->
+    <div id="cs" class="section">
+      <h1>Nahlášení nezákonného obsahu</h1>
+      <p class="subtitle">Aplikace Hyroot · Podle nařízení (EU) 2022/2065 (akt o digitálních službách)</p>
+
+      <h2>Kontaktní místo</h2>
+      <p>Jednotné kontaktní místo pro uživatele (čl. 12 DSA) i pro orgány členských států, Evropskou komisi a Evropský sbor pro digitální služby (čl. 11 DSA):</p>
+      <div class="card">
+        <p><strong>Lukáš Plesník – Hextree Studio</strong>, IČO 06506003</p>
+        <p>Slatinice 441, 783 42 Slatinice, Česká republika</p>
+        <p><strong>E-mail:</strong> <a href="mailto:support@hyroot.app">support@hyroot.app</a></p>
+        <p><strong>Jazyky komunikace:</strong> čeština, angličtina</p>
+      </div>
+
+      <h2>Formulář pro nahlášení</h2>
+      <p>Obsah v aplikaci Hyroot je soukromý a vidí ho jen uživatel, který ho vytvořil. Pokud se přesto dozvíte o nezákonném obsahu uloženém v Hyroot, vyplňte formulář. Po odeslání se otevře váš e-mail s předvyplněnou zprávou, kterou stačí odeslat.</p>
+
+      <form id="form-cs" novalidate>
+        <div>
+          <label for="cs-reason">Proč je obsah nezákonný? *<br /><span class="hint">Vysvětlete co nejpřesněji, o jaký obsah jde a jaký předpis podle vás porušuje.</span></label>
+          <textarea id="cs-reason" required></textarea>
+        </div>
+        <div>
+          <label for="cs-location">Kde se obsah nachází? *<br /><span class="hint">Např. e-mail nebo jméno účtu, název systému či rostliny, snímek obrazovky nebo jiný údaj, podle kterého obsah najdeme.</span></label>
+          <textarea id="cs-location" required style="min-height: 80px;"></textarea>
+        </div>
+        <div>
+          <label for="cs-name">Vaše jméno *<br /><span class="hint">Nepovinné, pokud jde o pohlavní zneužívání dětí.</span></label>
+          <input id="cs-name" type="text" autocomplete="name" />
+        </div>
+        <div>
+          <label for="cs-email">Váš e-mail *<br /><span class="hint">Nepovinné, pokud jde o pohlavní zneužívání dětí.</span></label>
+          <input id="cs-email" type="email" autocomplete="email" />
+        </div>
+        <label class="check">
+          <input id="cs-csam" type="checkbox" />
+          <span>Oznámení se týká pohlavního zneužívání dětí (jméno a e-mail pak nejsou povinné).</span>
+        </label>
+        <label class="check">
+          <input id="cs-faith" type="checkbox" required />
+          <span>Prohlašuji v dobré víře, že údaje a tvrzení v tomto oznámení jsou přesné a úplné. *</span>
+        </label>
+        <p class="error" id="cs-error" role="alert"></p>
+        <button type="submit">Odeslat oznámení</button>
+      </form>
+      <p style="margin-top: 16px;">Pokud se e-mail neotevře, pošlete stejné údaje přímo na <a href="mailto:support@hyroot.app">support@hyroot.app</a>.</p>
+
+      <h2>Co se stane potom</h2>
+      <ul>
+        <li>Přijetí oznámení vám potvrdíme e-mailem.</li>
+        <li>Oznámení posoudíme bez zbytečného odkladu a nestranně. K rozhodování nepoužíváme automatizované nástroje.</li>
+        <li>O výsledku vás informujeme, včetně možností, jak se proti rozhodnutí bránit.</li>
+        <li>Pokud obsah odstraníme nebo omezíme účet, sdělíme dotčenému uživateli důvody a možnost se ohradit.</li>
+      </ul>
+      <p>Další informace najdete v <a href="/terms">podmínkách užívání</a> a <a href="/">zásadách ochrany osobních údajů</a>.</p>
+    </div>
+
+    <!-- ENGLISH -->
+    <div id="en" class="section hidden">
+      <h1>Report Illegal Content</h1>
+      <p class="subtitle">Hyroot App · Under Regulation (EU) 2022/2065 (Digital Services Act)</p>
+
+      <h2>Point of Contact</h2>
+      <p>Single point of contact for users (Art. 12 DSA) and for Member State authorities, the European Commission and the European Board for Digital Services (Art. 11 DSA):</p>
+      <div class="card">
+        <p><strong>Lukáš Plesník – Hextree Studio</strong>, Company ID (IČO) 06506003</p>
+        <p>Slatinice 441, 783 42 Slatinice, Czech Republic</p>
+        <p><strong>Email:</strong> <a href="mailto:support@hyroot.app">support@hyroot.app</a></p>
+        <p><strong>Languages:</strong> Czech, English</p>
+      </div>
+
+      <h2>Reporting Form</h2>
+      <p>Content in Hyroot is private and visible only to the user who created it. If you nevertheless become aware of illegal content stored in Hyroot, fill in the form. On submit, your email app opens with a pre-filled message that you just need to send.</p>
+
+      <form id="form-en" novalidate>
+        <div>
+          <label for="en-reason">Why is the content illegal? *<br /><span class="hint">Explain as precisely as possible what the content is and which law you believe it violates.</span></label>
+          <textarea id="en-reason" required></textarea>
+        </div>
+        <div>
+          <label for="en-location">Where is the content? *<br /><span class="hint">E.g. the account email or name, system or plant name, a screenshot reference or anything else that helps us find it.</span></label>
+          <textarea id="en-location" required style="min-height: 80px;"></textarea>
+        </div>
+        <div>
+          <label for="en-name">Your name *<br /><span class="hint">Optional for reports of child sexual abuse.</span></label>
+          <input id="en-name" type="text" autocomplete="name" />
+        </div>
+        <div>
+          <label for="en-email">Your email *<br /><span class="hint">Optional for reports of child sexual abuse.</span></label>
+          <input id="en-email" type="email" autocomplete="email" />
+        </div>
+        <label class="check">
+          <input id="en-csam" type="checkbox" />
+          <span>This report concerns child sexual abuse (name and email are then optional).</span>
+        </label>
+        <label class="check">
+          <input id="en-faith" type="checkbox" required />
+          <span>I declare in good faith that the information and allegations in this notice are accurate and complete. *</span>
+        </label>
+        <p class="error" id="en-error" role="alert"></p>
+        <button type="submit">Submit notice</button>
+      </form>
+      <p style="margin-top: 16px;">If your email app does not open, send the same details to <a href="mailto:support@hyroot.app">support@hyroot.app</a>.</p>
+
+      <h2>What Happens Next</h2>
+      <ul>
+        <li>We confirm receipt of your notice by email.</li>
+        <li>We review the notice without undue delay and objectively. We do not use automated tools to decide.</li>
+        <li>We inform you of the outcome, including how you can challenge the decision.</li>
+        <li>If we remove content or restrict an account, we tell the affected user why and how to contest it.</li>
+      </ul>
+      <p>More information in our <a href="/terms">Terms of Service</a> and <a href="/">Privacy Policy</a>.</p>
+    </div>
+
+    <div class="footer">
+      <p>© 2026 Hextree Studio · Hyroot</p>
+    </div>
+  </div>
+
+  <script is:inline>
+    let currentLang = 'cs';
+    function toggleLang() {
+      const csEl = document.getElementById('cs');
+      const enEl = document.getElementById('en');
+      const btn = document.querySelector('.lang-toggle');
+      if (currentLang === 'cs') {
+        csEl.classList.add('hidden');
+        enEl.classList.remove('hidden');
+        btn.textContent = '🇨🇿 Česká verze';
+        currentLang = 'en';
+      } else {
+        enEl.classList.add('hidden');
+        csEl.classList.remove('hidden');
+        btn.textContent = '🇬🇧 English version';
+        currentLang = 'cs';
+      }
+    }
+
+    // Composes the notice (DSA Art. 16(2) elements) as an email to the point of contact.
+    const TEXT = {
+      cs: {
+        missing: 'Vyplňte prosím všechna povinná pole označená *.',
+        badEmail: 'Zadejte platný e-mail.',
+        subject: 'Oznámení nezákonného obsahu (DSA) – Hyroot',
+        reason: 'Proč je obsah nezákonný',
+        location: 'Kde se obsah nachází',
+        name: 'Jméno',
+        email: 'E-mail',
+        csam: 'Týká se pohlavního zneužívání dětí',
+        faith: 'Prohlašuji v dobré víře, že údaje a tvrzení v tomto oznámení jsou přesné a úplné.',
+        yes: 'ano',
+        no: 'ne',
+      },
+      en: {
+        missing: 'Please fill in all required fields marked *.',
+        badEmail: 'Enter a valid email.',
+        subject: 'Illegal content notice (DSA) – Hyroot',
+        reason: 'Why the content is illegal',
+        location: 'Where the content is',
+        name: 'Name',
+        email: 'Email',
+        csam: 'Concerns child sexual abuse',
+        faith: 'I declare in good faith that the information and allegations in this notice are accurate and complete.',
+        yes: 'yes',
+        no: 'no',
+      },
+    };
+
+    ['cs', 'en'].forEach(function (lang) {
+      const form = document.getElementById('form-' + lang);
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const t = TEXT[lang];
+        const val = function (id) { return document.getElementById(lang + '-' + id).value.trim(); };
+        const checked = function (id) { return document.getElementById(lang + '-' + id).checked; };
+        const errorEl = document.getElementById(lang + '-error');
+        const csam = checked('csam');
+        const email = val('email');
+
+        if (!val('reason') || !val('location') || !checked('faith') || (!csam && (!val('name') || !email))) {
+          errorEl.textContent = t.missing;
+          return;
+        }
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          errorEl.textContent = t.badEmail;
+          return;
+        }
+        errorEl.textContent = '';
+
+        const body = [
+          t.reason + ':\n' + val('reason'),
+          t.location + ':\n' + val('location'),
+          t.name + ': ' + (val('name') || '–'),
+          t.email + ': ' + (email || '–'),
+          t.csam + ': ' + (csam ? t.yes : t.no),
+          t.faith,
+        ].join('\n\n');
+
+        window.location.href = 'mailto:support@hyroot.app'
+          + '?subject=' + encodeURIComponent(t.subject)
+          + '&body=' + encodeURIComponent(body);
+      });
+    });
+  </script>
+</Layout>
