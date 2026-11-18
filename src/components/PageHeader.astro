@@ -1,0 +1,20 @@
+---
+// Top bar for the bilingual subpages: logo back to the landing page + CZ/EN switch.
+import LangSwitch from './LangSwitch.astro';
+---
+<header class="page-header">
+  <a href="/" class="brand" aria-label="Hyroot">
+    <img src="/logo-256.webp" alt="" width="32" height="32" />
+    <span>Hyroot</span>
+  </a>
+  <LangSwitch />
+</header>
+
+<style>
+  .page-header {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding-bottom: 20px; margin-bottom: 32px; border-bottom: 1px solid #1a3a24;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; color: #e6efe8; text-decoration: none; font-weight: 800; font-size: 18px; }
+  .brand img { border-radius: 8px; }
+</style>

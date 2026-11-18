@@ -1,5 +1,7 @@
 ---
 import type { LandingCopy } from '../i18n/landing';
+import LangSwitch from './LangSwitch.astro';
+import PlayBadge from './PlayBadge.astro';
 import { SITE_URL, PLAY_STORE_URL, BLOG_URL, SUPPORT_EMAIL } from '../config';
 
 interface Props {
@@ -10,6 +12,8 @@ const { t } = Astro.props;
 const hasBlog = BLOG_URL.length > 0;
 const canonical = SITE_URL + t.path;
 const playUrl = `${PLAY_STORE_URL}&hl=${t.lang}`;
+// Subpages read ?lang= so English visitors land on the English version.
+const sub = (path: string) => (t.lang === 'en' ? `${path}?lang=en` : path);
 
 const icons: Record<string, string> = {
   system: '<path d="M7 3h10v18H7z"/><path d="M7 8h10M7 13h10M7 18h10"/><circle cx="10" cy="5.5" r=".6"/><circle cx="10" cy="10.5" r=".6"/><circle cx="10" cy="15.5" r=".6"/>',
@@ -86,7 +90,7 @@ const faqLd = {
         <a href="#otazky">{t.nav.faq}</a>
       </nav>
       <div class="nav-end">
-        <a class="lang" href={t.nav.switchHref} hreflang={t.lang === 'cs' ? 'en' : 'cs'}>{t.nav.switchLang}</a>
+        <LangSwitch current={t.lang} hrefs={{ cs: '/', en: '/en/' }} />
         <a class="btn btn-small" href={playUrl}>{t.nav.download}</a>
       </div>
     </div>
@@ -99,10 +103,7 @@ const faqLd = {
           <p class="eyebrow">{t.hero.eyebrow}</p>
           <h1>{t.hero.title}</h1>
           <p class="lead">{t.hero.lead}</p>
-          <a class="store" href={playUrl}>
-            <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M5 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 5 3.5Z"/></svg>
-            <span><small>{t.badge.small}</small><strong>{t.badge.big}</strong></span>
-          </a>
+          <PlayBadge href={playUrl} small={t.badge.small} big={t.badge.big} />
           <p class="note">{t.hero.note}</p>
         </div>
 
@@ -229,10 +230,7 @@ const faqLd = {
         <img src="/logo-256.webp" alt="" width="88" height="88" loading="lazy" />
         <h2>{t.final.title}</h2>
         <p>{t.final.text}</p>
-        <a class="store" href={playUrl}>
-          <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M5 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 5 3.5Z"/></svg>
-          <span><small>{t.badge.small}</small><strong>{t.badge.big}</strong></span>
-        </a>
+        <PlayBadge href={playUrl} small={t.badge.small} big={t.badge.big} />
       </div>
     </section>
   </main>
@@ -244,10 +242,10 @@ const faqLd = {
         <span>Hyroot</span>
       </div>
       <nav class="footer-links">
-        <a href="/privacy">{t.footer.privacy}</a>
-        <a href="/terms">{t.footer.terms}</a>
-        <a href="/dsa">{t.footer.dsa}</a>
-        <a href="/delete">{t.footer.delete}</a>
+        <a href={sub('/privacy')}>{t.footer.privacy}</a>
+        <a href={sub('/terms')}>{t.footer.terms}</a>
+        <a href={sub('/dsa')}>{t.footer.dsa}</a>
+        <a href={sub('/delete')}>{t.footer.delete}</a>
         {hasBlog && <a href={BLOG_URL}>{t.footer.blog}</a>}
         <a href={`mailto:${SUPPORT_EMAIL}`}>{t.footer.contact}</a>
       </nav>
@@ -294,8 +292,6 @@ const faqLd = {
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 15px; }
     .nav-links a:hover { color: var(--text); }
     .nav-end { margin-left: auto; display: flex; align-items: center; gap: 14px; }
-    .lang { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 600; }
-    .lang:hover { color: var(--text); }
 
     .btn {
       display: inline-block; background: var(--accent); color: var(--bg);
@@ -311,15 +307,6 @@ const faqLd = {
     .lead { font-size: 19px; color: var(--muted); max-width: 520px; margin-bottom: 28px; }
     .note { color: var(--muted); font-size: 14px; margin-top: 14px; }
 
-    .store {
-      display: inline-flex; align-items: center; gap: 12px;
-      background: #000; color: #fff; text-decoration: none;
-      border: 1px solid #3a3a3a; border-radius: 12px; padding: 9px 20px 9px 16px;
-    }
-    .store:hover { border-color: var(--accent); }
-    .store span { display: flex; flex-direction: column; line-height: 1.15; text-align: left; }
-    .store small { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; opacity: .85; }
-    .store strong { font-size: 20px; font-weight: 600; }
 
     .phone {
       justify-self: center; width: 290px; padding: 12px;
@@ -421,6 +408,7 @@ const faqLd = {
     @media (max-width: 480px) {
       .features { grid-template-columns: 1fr; }
       .phone { width: 100%; max-width: 290px; }
+      .nav-end .btn-small { display: none; }
       .lead { font-size: 17px; }
     }
   </style>

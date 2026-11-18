@@ -10,7 +10,7 @@ export interface LandingCopy {
   lang: Lang;
   path: string;
   meta: { title: string; description: string };
-  nav: { features: string; pro: string; blog: string; faq: string; download: string; switchLang: string; switchHref: string };
+  nav: { features: string; pro: string; blog: string; faq: string; download: string };
   hero: { eyebrow: string; title: string; lead: string; cta: string; note: string };
   mock: { system: string; day: string; ph: string; ec: string; water: string; next: string; reminder: string };
   featuresTitle: string;
@@ -44,7 +44,7 @@ export const cs: LandingCopy = {
     description:
       'Zapisuj pH a EC, sleduj plodiny od klíčení po sklizeň a nastav si připomínky. Hyroot je pěstitelský deník pro domácí hydroponii na Androidu.',
   },
-  nav: { features: 'Funkce', pro: 'Ceník', blog: 'Blog', faq: 'Otázky', download: 'Stáhnout', switchLang: 'EN', switchHref: '/en/' },
+  nav: { features: 'Funkce', pro: 'Ceník', blog: 'Blog', faq: 'Otázky', download: 'Stáhnout' },
   hero: {
     eyebrow: 'Pěstitelský deník pro hydroponii',
     title: 'Hodnoty z hydroponie na jednom místě',
@@ -130,7 +130,7 @@ export const en: LandingCopy = {
     description:
       'Log pH and EC, follow your crops from sprouting to harvest and set reminders. Hyroot is a grow journal for home hydroponics on Android.',
   },
-  nav: { features: 'Features', pro: 'Pricing', blog: 'Blog', faq: 'FAQ', download: 'Download', switchLang: 'CZ', switchHref: '/' },
+  nav: { features: 'Features', pro: 'Pricing', blog: 'Blog', faq: 'FAQ', download: 'Download' },
   hero: {
     eyebrow: 'Grow journal for hydroponics',
     title: 'All your hydroponics readings in one place',
