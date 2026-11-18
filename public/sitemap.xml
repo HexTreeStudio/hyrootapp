@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://hyroot.app/</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://hyroot.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hyroot.app/en/"/>
+  </url>
+  <url>
+    <loc>https://hyroot.app/en/</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://hyroot.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hyroot.app/en/"/>
+  </url>
+  <url><loc>https://hyroot.app/privacy</loc></url>
+  <url><loc>https://hyroot.app/terms</loc></url>
+  <url><loc>https://hyroot.app/delete</loc></url>
+  <url><loc>https://hyroot.app/dsa</loc></url>
+</urlset>

@@ -1,0 +1,32 @@
+---
+interface Props {
+  href: string;
+  small: string;
+  big: string;
+}
+
+const { href, small, big } = Astro.props;
+---
+<a class="play" href={href}>
+  <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+    <path fill="#00a0ff" d="M3.6 1.6 13.6 12 3.6 22.4c-.3-.3-.5-.8-.5-1.4V3c0-.6.2-1.1.5-1.4Z"/>
+    <path fill="#00e676" d="M3.6 1.6c.5-.5 1.3-.6 2.2-.1l10.8 7.8-3 2.7Z"/>
+    <path fill="#ff3d47" d="M3.6 22.4 13.6 12l3 2.7-10.8 7.8c-.9.5-1.7.4-2.2-.1Z"/>
+    <path fill="#ffc400" d="m16.6 9.3 3.7 2.1c.8.5.8.7 0 1.2l-3.7 2.1-3-2.7Z"/>
+  </svg>
+  <span><small>{small}</small><strong>{big}</strong></span>
+</a>
+
+<style>
+  .play {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: #000; color: #fff; text-decoration: none;
+    border: 1px solid #5f6368; border-radius: 12px; padding: 9px 22px 9px 16px;
+    transition: border-color .15s, transform .15s;
+  }
+  .play:hover { border-color: #52b788; transform: translateY(-1px); }
+  .play:focus-visible { outline: 2px solid #52b788; outline-offset: 3px; }
+  span { display: flex; flex-direction: column; line-height: 1.15; text-align: left; }
+  small { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; opacity: .85; }
+  strong { font-size: 21px; font-weight: 600; letter-spacing: -.01em; }
+</style>

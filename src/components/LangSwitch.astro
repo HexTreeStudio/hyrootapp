@@ -1,0 +1,85 @@
+---
+// CZ / EN switch with flags. With `hrefs` it links between separate pages (landing);
+// without, it toggles every element marked data-lang-content="cs|en" on the current page.
+interface Props {
+  current?: 'cs' | 'en';
+  hrefs?: { cs: string; en: string };
+}
+
+const { current = 'cs', hrefs } = Astro.props;
+const langs = [
+  { code: 'cs', label: 'CZ', name: 'Čeština' },
+  { code: 'en', label: 'EN', name: 'English' },
+] as const;
+---
+<div class="lang-switch" data-lang-switch role="group" aria-label="Jazyk / Language">
+  {langs.map((l) => {
+    const flag = l.code === 'cs'
+      ? <svg class="flag" viewBox="0 0 6 4" aria-hidden="true"><path fill="#fff" d="M0 0h6v2H0z"/><path fill="#d7141a" d="M0 2h6v2H0z"/><path fill="#11457e" d="M0 0l3 2-3 2z"/></svg>
+      : <svg class="flag" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><clipPath id="lsw-uk"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30m0-30L0 30"/><path stroke="#c8102e" stroke-width="4" clip-path="url(#lsw-uk)" d="M0 0l60 30m0-30L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#c8102e" stroke-width="6" d="M30 0v30M0 15h60"/></svg>;
+    return hrefs
+      ? <a href={hrefs[l.code]} hreflang={l.code} lang={l.code} title={l.name} aria-current={l.code === current ? 'true' : undefined}>{flag}{l.label}</a>
+      : <button type="button" data-lang={l.code} lang={l.code} title={l.name} aria-pressed={l.code === current ? 'true' : 'false'}>{flag}{l.label}</button>;
+  })}
+</div>
+
+{!hrefs && (
+  <script is:inline>
+    (function () {
+      var KEY = 'hyroot-lang';
+
+      function apply(lang) {
+        document.documentElement.lang = lang;
+        document.querySelectorAll('[data-lang-switch] button').forEach(function (b) {
+          b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+        });
+        document.querySelectorAll('[data-lang-content]').forEach(function (el) {
+          el.classList.toggle('hidden', el.dataset.langContent !== lang);
+        });
+      }
+
+      function initial() {
+        var param = new URLSearchParams(location.search).get('lang');
+        if (param === 'cs' || param === 'en') return param;
+        try {
+          var stored = localStorage.getItem(KEY);
+          if (stored === 'cs' || stored === 'en') return stored;
+        } catch (e) {}
+        return /^(cs|sk)/i.test(navigator.language || '') ? 'cs' : 'en';
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        apply(initial());
+        document.querySelectorAll('[data-lang-switch] button').forEach(function (b) {
+          b.addEventListener('click', function () {
+            var lang = b.dataset.lang;
+            apply(lang);
+            try { localStorage.setItem(KEY, lang); } catch (e) {}
+            // Keep the hash untouched: auth pages carry tokens there.
+            var url = new URL(location.href);
+            url.searchParams.set('lang', lang);
+            history.replaceState(null, '', url);
+          });
+        });
+      });
+    })();
+  </script>
+)}
+
+<style>
+  .lang-switch {
+    display: inline-flex; padding: 3px; gap: 2px;
+    background: #10261a; border: 1px solid #1f4029; border-radius: 999px;
+  }
+  a, button {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 11px 5px 8px; border: 0; border-radius: 999px;
+    background: transparent; color: #a3b8a9; cursor: pointer;
+    font: inherit; font-size: 13px; font-weight: 700; letter-spacing: .03em;
+    line-height: 1; text-decoration: none;
+  }
+  a:hover, button:hover { color: #e6efe8; }
+  [aria-current='true'], [aria-pressed='true'] { background: #1f4029; color: #e6efe8; }
+  .flag { width: 18px; height: 12px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(0,0,0,.25); flex: none; }
+  a:focus-visible, button:focus-visible { outline: 2px solid #52b788; outline-offset: 2px; }
+</style>
